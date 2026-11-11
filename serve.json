@@ -1,0 +1,51 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/main/index.html"
+    },
+    {
+      "source": "/atlas-optic",
+      "destination": "/main/atlas-optic.html"
+    },
+    {
+      "source": "/atlas-installment",
+      "destination": "/main/atlas-installment.html"
+    },
+    {
+      "source": "/atlas-garage",
+      "destination": "/main/atlas-garage.html"
+    },
+    {
+      "source": "/atlas-school",
+      "destination": "/main/atlas-school.html"
+    },
+    {
+      "source": "/atlas-auto",
+      "destination": "/main/atlas-auto.html"
+    },
+    {
+      "source": "/atlas-travel",
+      "destination": "/main/atlas-travel.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/main",
+      "destination": "/",
+      "type": 301
+    },
+    {
+      "source": "/main/index",
+      "destination": "/",
+      "type": 301
+    },
+    {
+      "source": "/main/:path*",
+      "destination": "/:path*",
+      "type": 301
+    }
+  ]
+}

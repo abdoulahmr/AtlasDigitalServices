@@ -1,0 +1,12 @@
+{
+  "name": "atlas-digital-services",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Atlas Digital Services marketing site (static, EN/FR/AR)",
+  "scripts": {
+    "dev": "npx serve public -c ../serve.json"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
+}

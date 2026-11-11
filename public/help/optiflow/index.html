@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OptiFlow — Manuel d’utilisation / دليل المستخدم</title>
+<style>
+:root {
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-light: #eff6ff;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --bg-page: #f8fafc;
+  --bg-card: #ffffff;
+  --border: #e2e8f0;
+  --accent: #3b82f6;
+  --font-base: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-ar: "Segoe UI", "Noto Naskh Arabic", Tahoma, sans-serif;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -2px rgba(0,0,0,0.05);
+  --radius: 12px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  font-family: var(--font-base);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+[lang="ar"] {
+  font-family: var(--font-ar);
+  line-height: 1.85;
+}
+
+header {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: #ffffff;
+  padding: 48px 20px;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+}
+
+.header-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+header h1 {
+  margin: 0 0 8px 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+}
+
+header p {
+  margin: 4px 0;
+  color: #94a3b8;
+  font-size: 1.05rem;
+}
+
+header p[lang="ar"] {
+  font-size: 1.15rem;
+  color: #cbd5e1;
+}
+
+main {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 40px 20px 80px 20px;
+}
+
+nav {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 32px;
+  box-shadow: var(--shadow-sm);
+}
+
+nav h2 {
+  margin: 0 0 16px 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 10px;
+}
+
+nav ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 8px 24px;
+}
+
+nav li {
+  border-bottom: 1px dashed var(--border);
+}
+
+nav a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 4px;
+  color: var(--text-main);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.15s ease;
+}
+
+nav a:hover {
+  color: var(--primary);
+}
+
+nav a span:first-child {
+  font-weight: 500;
+}
+
+nav a:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+section {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-sm);
+  break-inside: avoid-page;
+}
+
+h2.section-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 24px 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 12px;
+}
+
+h2.section-title .no {
+  background-color: var(--primary);
+  color: #ffffff;
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+h2.section-title .title-fr {
+  flex: 1;
+  color: var(--text-main);
+}
+
+h2.section-title [lang="ar"] {
+  color: var(--primary);
+}
+
+.cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.cols > div[lang="ar"] {
+  border-inline-start: 2px solid var(--primary-light);
+  padding-inline-start: 28px;
+}
+
+ol {
+  margin: 0;
+  padding-inline-start: 1.2em;
+}
+
+li {
+  margin-bottom: 8px;
+}
+
+li:last-child {
+  margin-bottom: 0;
+}
+
+code {
+  background-color: var(--primary-light);
+  color: var(--primary-hover);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 0.875em;
+  direction: ltr;
+  unicode-bidi: isolate;
+  border: 1px solid #dbeafe;
+}
+
+.shot {
+  margin: 24px 0 0 0;
+}
+
+.ph {
+  border: 2px dashed #cbd5e1;
+  background-color: #f8fafc;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.ph .ico {
+  font-size: 1.5rem;
+  color: var(--text-muted);
+}
+
+.ph b {
+  color: var(--text-main);
+  font-size: 0.95rem;
+}
+
+.ph p {
+  margin: 2px 0;
+  font-size: 0.9rem;
+}
+
+.tip {
+  background-color: var(--primary-light);
+  border: 1px solid #bfdbfe;
+}
+
+.tip h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+  color: var(--primary-hover);
+}
+
+footer {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  padding: 20px 0 40px 0;
+}
+
+@media (max-width: 768px) {
+  header {
+    padding: 32px 16px;
+  }
+  header h1 {
+    font-size: 1.8rem;
+  }
+  main {
+    padding: 20px 12px 40px 12px;
+  }
+  .cols {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .cols > div[lang="ar"] {
+    border-inline-start: none;
+    padding-inline-start: 0;
+    border-top: 2px solid var(--primary-light);
+    padding-top: 20px;
+  }
+  nav ol {
+    grid-template-columns: 1fr;
+  }
+  section {
+    padding: 20px;
+  }
+  h2.section-title {
+    flex-wrap: wrap;
+  }
+}
+
+@media print {
+  body {
+    background: #ffffff;
+  }
+  header {
+    background: none;
+    color: #000000;
+    padding: 16px;
+    border-bottom: 2px solid #000000;
+  }
+  header p {
+    color: #333333;
+  }
+  section, nav {
+    box-shadow: none;
+    border: 1px solid #cccccc;
+  }
+  .ph {
+    background: #ffffff;
+    border-style: solid;
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-container">
+    <h1>OptiFlow</h1>
+    <p>Manuel d’utilisation — Caisse &amp; ERP pour opticiens</p>
+    <p lang="ar" dir="rtl">دليل المستخدم — نظام الصندوق وإدارة محلات البصريات</p>
+  </div>
+</header>
+
+<main>
+  <nav aria-label="Sommaire">
+    <h2>
+      <span>Sommaire</span>
+      <span lang="ar" dir="rtl">الفهرس</span>
+    </h2>
+    <ol>
+      <li><a href="#activation"><span>1. Activation et essai gratuit</span><span lang="ar" dir="rtl">1. التفعيل والفترة التجريبية</span></a></li>
+      <li><a href="#login"><span>2. Première configuration et connexion</span><span lang="ar" dir="rtl">2. الإعداد الأول وتسجيل الدخول</span></a></li>
+      <li><a href="#dashboard"><span>3. Tableau de bord</span><span lang="ar" dir="rtl">3. لوحة القيادة</span></a></li>
+      <li><a href="#pos"><span>4. Nouvelle Prescription (caisse)</span><span lang="ar" dir="rtl">4. وصفة جديدة (الصندوق)</span></a></li>
+      <li><a href="#patients"><span>5. Fiche Client</span><span lang="ar" dir="rtl">5. ملف الزبون</span></a></li>
+      <li><a href="#matrix"><span>6. Matrice des Verres</span><span lang="ar" dir="rtl">6. مصفوفة العدسات</span></a></li>
+      <li><a href="#catalogue"><span>7. Catalogue</span><span lang="ar" dir="rtl">7. الكتالوج</span></a></li>
+      <li><a href="#finance"><span>8. Finance (administrateur)</span><span lang="ar" dir="rtl">8. المالية (المدير)</span></a></li>
+      <li><a href="#inventory"><span>9. Gestion du Stock (administrateur)</span><span lang="ar" dir="rtl">9. إدارة المخزون (المدير)</span></a></li>
+      <li><a href="#suppliers"><span>10. Fournisseurs (administrateur)</span><span lang="ar" dir="rtl">10. الموردون (المدير)</span></a></li>
+      <li><a href="#settings"><span>11. Paramètres (administrateur)</span><span lang="ar" dir="rtl">11. الإعدادات (المدير)</span></a></li>
+    </ol>
+  </nav>
+
+  <section id="activation">
+    <h2 class="section-title">
+      <span class="no">1</span>
+      <span class="title-fr">Activation et essai gratuit</span>
+      <span lang="ar" dir="rtl">التفعيل والفترة التجريبية</span>
+    </h2>
+    <div class="cols">
+      <div lang="fr">
+        <ol>
+          <li>Au premier lancement, saisissez votre clé de licence (<code>OPTI-XXXX-XXXX-XXXX</code>) puis cliquez sur « Activer la Licence ».</li>
+          <li>Sans clé, cliquez sur « Commencer l’essai de 7 jours » : toutes les fonctions sont disponibles.</li>
+          <li>Pendant l’essai, « Continuer l’essai » ouvre l’application. Le bandeau indique les jours restants.</li>
+        </ol>
+      </div>
+      <div lang="ar" dir="rtl">
+        <ol>
+          <li>عند التشغيل الأول، أدخل مفتاح الترخيص (<code>OPTI-XXXX-XXXX-XXXX</code>) ثم اضغط «Activer la Licence».</li>
+          <li>بدون مفتاح، اضغط «Commencer l’essai de 7 jours» لتجربة كل الوظائف مجانًا.</li>
+          <li>أثناء التجربة، يفتح الزر «Continuer l’essai» التطبيق. يعرض الشريط عدد الأيام المتبقية.</li>
+        </ol>
+      </div>
+    </div>
+    <figure class="shot">
+      <div class="ph">
+        <img src="../../shared/screenshots/1.png" alt="Capture 1">
+      </div>
+    </figure>
+  </section>
+
+  <section id="login">
+    <h2 class="section-title">
+      <span class="no">2</span>
+      <span class="title-fr">Première configuration et connexion</span>
+      <span lang="ar" dir="rtl">الإعداد الأول وتسجيل الدخول</span>
+    </h2>
+    <div class="cols">
+      <div lang="fr">
+        <ol>
+          <li>Au premier démarrage, créez le compte <b>Administrateur</b> (nom d’utilisateur et mot de passe).</li>
+          <li>Ensuite, connectez-vous à chaque lancement.</li>
+          <li>L’<b>Administrateur</b> voit tous les modules. Les autres utilisateurs voient : Tableau de bord, Nouvelle Prescription, Fiche Client, Matrice des Verres et Catalogue.</li>
+        </ol>
+      </div>
+      <div lang="ar" dir="rtl">
+        <ol>
+          <li>عند أول تشغيل، أنشئ حساب <b>المدير (Administrateur)</b> باسم مستخدم وكلمة مرور.</li>
+          <li>بعد ذلك، سجّل الدخول في كل مرة تفتح فيها التطبيق.</li>
+          <li>يرى <b>المدير</b> جميع الأقسام. أما بقية المستخدمين فيرون: لوحة القيادة، وصفة جديدة، ملف الزبون، مصفوفة العدسات، والكتالوج.</li>
+        </ol>
+      </div>
+    </div>
+    <figure class="shot">
+      <div class="ph">
+        <img src="../../shared/screenshots/2.png" alt="Capture 2">
+      </div>
+    </figure>
+  </section>
+
+  <section id="dashboard">
+    <h2 class="section-title">
+      <span class="no">3</span>
+      <span class="title-fr">Tableau de bord</span>
+      <span lang="ar" dir="rtl">لوحة القيادة</span>
+    </h2>
+    <div class="cols">
+      <div lang="fr">
+        <ol>
+          <li>Page d’accueil : six cartes résument l’activité (clients, articles en stock, valeur du stock, commandes en cours, fournisseurs, dette fournisseurs).</li>
+          <li>Les chiffres se mettent à jour automatiquement à chaque ouverture.</li>
+        </ol>
+      </div>
+      <div lang="ar" dir="rtl">
+        <ol>
+          <li>الصفحة الرئيسية: ست بطاقات تلخّص النشاط (الزبائن، المواد في المخزون، قيمة المخزون، الطلبات الجارية، الموردون، ديون الموردين).</li>
+          <li>تتحدّث الأرقام تلقائيًا عند كل فتح.</li>
+        </ol>
+      </div>
+    </div>
+    <figure class="shot">
+      <div class="ph">
+        <img src="../../shared/screenshots/3.png" alt="Capture 3" width="600">
+      </div>
+    </figure>
+  </section>
+
+  <section id="pos">
+    <h2 class="section-title">
+      <span class="no">4</span>
+      <span class="title-fr">Nouvelle Prescription (caisse)</span>
+      <span lang="ar" dir="rtl">وصفة جديدة (الصندوق)</span>
+    </h2>
+    <div class="cols">
+      <div lang="fr">
+        <ol>
+          <li><b>Patient :</b> tapez le nom dans la recherche et choisissez-le dans la liste. Un indicateur confirme « Patient sélectionné ».</li>
+          <li><b>Articles :</b> choisissez l’onglet (verres, lentilles, montures et autres articles, réparation), sélectionnez l’article puis ajoutez-le au panier.</li>
+          <li><b>Verres :</b> choisissez type, groupe optique, traitement, SPH et CYL. Le prix et le stock s’affichent (vert : en stock, orange : faible, rouge : rupture).</li>
+          <li><b>Panier :</b> vérifiez les lignes, retirez-en avec ✕ ou videz le panier, puis cliquez sur « Finaliser la vente ».</li>
+          <li><b>Paiement :</b> « Payer Avant » (total), « Payer Après » (crédit) ou « Payer en Deux Fois » (acompte). Choisissez Espèces, CIB ou Chèque, vérifiez le reste à payer et cliquez sur « Finaliser la Vente ».</li>
+          <li>Le bouton rouge des dettes ouvre les commandes impayées pour encaisser un versement.</li>
+        </ol>
+      </div>
+      <div lang="ar" dir="rtl">
+        <ol>
+          <li><b>الزبون:</b> اكتب الاسم في البحث واختره من القائمة. يظهر المؤشر «Patient sélectionné».</li>
+          <li><b>المواد:</b> اختر التبويب (عدسات، لينتيل، إطارات ومواد أخرى، تصليح)، حدّد المادة ثم أضفها إلى السلة.</li>
+          <li><b>العدسات:</b> اختر النوع والمجموعة البصرية والمعالجة وقيمتي SPH وCYL. يظهر السعر والمخزون (أخضر: متوفر، برتقالي: قليل، أحمر: نفد).</li>
+          <li><b>السلة:</b> راجع السطور، احذف بالزر ✕ أو أفرغ السلة، ثم اضغط «Finaliser la vente».</li>
+          <li><b>الدفع:</b> «Payer Avant» (المبلغ كاملًا)، «Payer Après» (دَيْن) أو «Payer en Deux Fois» (دفعة أولى). اختر نقدًا أو CIB أو شيكًا، تحقق من المبلغ المتبقي ثم اضغط «Finaliser la Vente».</li>
+          <li>يفتح الزر الأحمر للديون الطلبات غير المسدّدة لتسجيل دفعة.</li>
+        </ol>
+      </div>
+    </div>
+    <figure class="shot">
+      <div class="ph">
+        <span class="ico">▣</span>
+        <b>Capture 4 / لقطة 4</b>
+        <p lang="fr">Écran de caisse : recherche patient à gauche, sélection d’articles au centre, panier et total à droite.</p>
+        <p lang="ar" dir="rtl">شاشة الصندوق: البحث عن الزبون على اليسار، اختيار المواد في الوسط، السلة والمجموع على اليمين.</p>
+      </div>
+    </figure>
+    <figure class="shot">
+      <div class="ph">
+        <span class="ico">▣</span>
+        <b>Capture 5 / لقطة 5</b>
+        <p lang="fr">Fenêtre de paiement : total à payer, trois modes de paiement, montant reçu, reste à payer.</p>
+        <p lang="ar" dir="rtl">نافذة الدفع: المبلغ الإجمالي، ثلاث طرق للدفع، المبلغ المستلم، المتبقي.</p>
+      </div>
+    </figure>
+  </section>
+
+  <section id="patients">
+    <h2 class="section-title">
+      <span class="no">5</span>
+      <span class="title-fr">Fiche Client</span>
+      <span lang="ar" dir="rtl">ملف الزبون</span>
+    </h2>
+    <div class="cols">
+      <div lang="fr">
+        <ol>
+          <li>Cliquez sur « Ajouter » pour créer un client, puis utilisez la recherche pour le retrouver.</li>
+          <li>Ouvrez sa fiche pour saisir la correction optique (OD / OG), les lentilles de contact et consulter l’historique des verres, lentilles et montures.</li>
+          <li>Cliquez sur « Enregistrer » en bas de la fiche pour conserver les modifications.</li>
+        </ol>
+      </div>
+      <div lang="ar" dir="rtl">
+        <ol>
+          <li>اضغط «Ajouter» لإنشاء زبون جديد، ثم استعمل البحث للعثور عليه.</li>
+          <li>افتح ملفه لإدخال التصحيح البصري (العين اليمنى OD / اليسرى OG) والعدسات اللاصقة، ومراجعة سجل العدسات والإطارات.</li>
+          <li>اضغط «Enregistrer» أسفل الملف لحفظ التعديلات.</li>
+        </ol>
+      </div>
+    </div>
+    <figure class="shot">
+      <div class="ph">
+        <span class="ico">▣</span>
+        <b>Capture 6 / لقطة 6</b>
+        <p lang="fr">Liste des clients avec barre de recherche et bouton d’ajout.</p>
+        <p lang="ar" dir="rtl">قائمة الزبائن مع شريط البحث وزر الإضافة.</p>
+      </div>
+    </figure>
+    <figure class="shot">
+      <div class="ph">
+        <span class="ico">▣</span>
+        <b>Capture 7 / لقطة 7</b>
+        <p lang="fr">Fiche client : onglets de prescription, lentilles de contact, historique des montures.</p>
+        <p lang="ar" dir="rtl">ملف الزبون: تبويبات الوصفة والعدسات اللاصقة وسجل الإطارات.</p>
+      </div>
+    </figure>
+  </section>
+
+  <section id="matrix">
+    <h2 class="section-title">
+      <span class="no">6</span>
+      <span class="title-fr">Matrice des Verres</span>
+      <span lang="ar" dir="rtl">مصفوفة العدسات</span>
+    </h2>
+    <div class="cols">
+      <div lang="fr">
+        <ol>
+          <li>Choisissez l’onglet du type de verre, puis l’affichage : « Prix de Vente » ou « Prix d’Achat ».</li>
+          <li>Cliquez sur « Modifier » pour changer les prix directement dans le tableau, puis sur « Enregistrer ».</li>
+          <li>En mode modification, le bouton « Stock » de chaque case permet de gérer les quantités par SPH / CYL.</li>
+        </ol>
+      </div>
+      <div lang="ar" dir="rtl">
+        <ol>
+          <li>اختر تبويب نوع العدسة، ثم طريقة العرض: «Prix de Vente» أو «Prix d’Achat».</li>
+          <li>اضغط «Modifier» لتغيير الأسعار مباشرة في الجدول، ثم «Enregistrer».</li>
+          <li>في وضع التعديل، يتيح الزر «Stock» في كل خانة إدارة الكميات حسب SPH / CYL.</li>
+        </ol>
+      </div>
+    </div>
+    <figure class="shot">
+      <div class="ph">
+        <span class="ico">▣</span>
+        <b>Capture 8 / لقطة 8</b>
+        <p lang="fr">Matrice des prix : groupes optiques en lignes, traitements en colonnes.</p>
+        <p lang="ar" dir="rtl">مصفوفة الأسعار: المجموعات البصرية في الصفوف والمعالجات في الأعمدة.</p>
+      </div>
+    </figure>
+    <figure class="shot">
+      <div class="ph">
+        <span class="ico">▣</span>
+        <b>Capture 9 / لقطة 9</b>
+        <p lang="fr">Fenêtre de stock d’un verre : sélection SPH / CYL, quantité, liste des entrées.</p>
+        <p lang="ar" dir="rtl">نافذة مخزون العدسة: اختيار SPH / CYL والكمية وقائمة الإدخالات.</p>
+      </div>
+    </figure>
+  </section>
+
+  <section id="catalogue">
+    <h2 class="section-title">
+      <span class="no">7</span>
+      <span class="title-fr">Catalogue</span>
+      <span lang="ar" dir="rtl">الكتالوج</span>
+    </h2>
+    <div class="cols">
+      <div lang="fr">
+        <ol>
+          <li>Consultez tous les articles et verres regroupés par catégorie, avec prix et stock.</li>
+          <li>Utilisez la recherche, ou « Tout développer » / « Tout réduire » pour ouvrir ou fermer les groupes.</li>
+        </ol>
+      </div>
+      <div lang="ar" dir="rtl">
+        <ol>
+          <li>تصفّح كل المواد والعدسات مجمّعة حسب الفئة مع الأسعار والمخزون.</li>
+          <li>استعمل البحث، أو «Tout développer» / «Tout réduire» لفتح المجموعات أو طيّها.</li>
+        </ol>
+      </div>
+    </div>
+    <figure class="shot">
+      <div class="ph">
+        <span class="ico">▣</span>
+        <b>Capture 10 / لقطة 10</b>
+        <p lang="fr">Catalogue en arbre : catégories dépliables avec prix et stock.</p>
+        <p lang="ar" dir="rtl">الكتالوج على شكل شجرة: فئات قابلة للطيّ مع الأسعار والمخزون.</p>
+      </div>
+    </figure>
+  </section>
+
+  <section id="finance">
+    <h2 class="section-title">
+      <span class="no">8</span>
+      <span class="title-fr">Finance (administrateur)</span>
+      <span lang="ar" dir="rtl">المالية (المدير)</span>
+    </h2>
+    <div class="cols">
+      <div lang="fr">
+        <ol>
+          <li>Les cartes montrent : chiffre d’affaires, profit réalisé, dépenses, profit net, dettes fournisseurs et valeur du stock.</li>
+          <li>Les boutons du haut ouvrent : les instantanés financiers, l’historique complet des ventes (avec réimpression du reçu), l’historique des dépenses, et l’ajout d’une charge.</li>
+          <li>Pour une charge, saisissez le libellé et le montant puis cliquez sur « Enregistrer ».</li>
+        </ol>
+      </div>
+      <div lang="ar" dir="rtl">
+        <ol>
+          <li>تعرض البطاقات: رقم الأعمال، الربح المحقق، المصاريف، الربح الصافي، ديون الموردين وقيمة المخزون.</li>
+          <li>تفتح أزرار الأعلى: اللقطات المالية، سجل المبيعات الكامل (مع إعادة طباعة الوصل)، سجل المصاريف، وإضافة مصروف.</li>
+          <li>لإضافة مصروف، أدخل البيان والمبلغ ثم اضغط «Enregistrer».</li>
+        </ol>
+      </div>
+    </div>
+    <figure class="shot">
+      <div class="ph">
+        <span class="ico">▣</span>
+        <b>Capture 11 / لقطة 11</b>
+        <p lang="fr">Page Finance : six cartes et barre de boutons.</p>
+        <p lang="ar" dir="rtl">صفحة المالية: ست بطاقات وشريط الأزرار.</p>
+      </div>
+    </figure>
+    <figure class="shot">
+      <div class="ph">
+        <span class="ico">▣</span>
+        <b>Capture 12 / لقطة 12</b>
+        <p lang="fr">Historique des ventes avec bouton d’impression du reçu.</p>
+        <p lang="ar" dir="rtl">سجل المبيعات مع زر طباعة الوصل.</p>
+      </div>
+    </figure>
+  </section>
+
+  <section id="inventory">
+    <h2 class="section-title">
+      <span class="no">9</span>
+      <span class="title-fr">Gestion du Stock (administrateur)</span>
+      <span lang="ar" dir="rtl">إدارة المخزون (المدير)</span>
+    </h2>
+    <div class="cols">
+      <div lang="fr">
+        <ol>
+          <li>Les cartes indiquent le nombre de références, la valeur du stock, les stocks faibles et les ruptures.</li>
+          <li>Ajoutez un article avec le bouton « Ajouter », cherchez dans la liste, et modifiez un article existant.</li>
+          <li>Utilisez la mise à jour du stock (réapprovisionnement) pour ajouter des quantités reçues.</li>
+        </ol>
+      </div>
+      <div lang="ar" dir="rtl">
+        <ol>
+          <li>تعرض البطاقات عدد المراجع وقيمة المخزون والمخزون القليل والمواد المنتهية.</li>
+          <li>أضف مادة بزر «Ajouter»، وابحث في القائمة، وعدّل أي مادة موجودة.</li>
+          <li>استعمل تحديث المخزون (إعادة التموين) لإضافة الكميات المستلمة.</li>
+        </ol>
+      </div>
+    </div>
+    <figure class="shot">
+      <div class="ph">
+        <span class="ico">▣</span>
+        <b>Capture 13 / لقطة 13</b>
+        <p lang="fr">Page Gestion du Stock : cartes, recherche, tableau des articles.</p>
+        <p lang="ar" dir="rtl">صفحة إدارة المخزون: البطاقات والبحث وجدول المواد.</p>
+      </div>
+    </figure>
+    <figure class="shot">
+      <div class="ph">
+        <span class="ico">▣</span>
+        <b>Capture 14 / لقطة 14</b>
+        <p lang="fr">Fenêtre d’ajout / modification d’un article.</p>
+        <p lang="ar" dir="rtl">نافذة إضافة / تعديل مادة.</p>
+      </div>
+    </figure>
+  </section>
+
+  <section id="suppliers">
+    <h2 class="section-title">
+      <span class="no">10</span>
+      <span class="title-fr">Fournisseurs (administrateur)</span>
+      <span lang="ar" dir="rtl">الموردون (المدير)</span>
+    </h2>
+    <div class="cols">
+      <div lang="fr">
+        <ol>
+          <li>Ajoutez un fournisseur avec « Ajouter Fournisseur », puis recherchez-le dans la liste.</li>
+          <li>Ouvrez son registre pour enregistrer un achat ou un paiement ; le solde dû est recalculé automatiquement.</li>
+        </ol>
+      </div>
+      <div lang="ar" dir="rtl">
+        <ol>
+          <li>أضف موردًا بزر «Ajouter Fournisseur» ثم ابحث عنه في القائمة.</li>
+          <li>افتح سجلّه لتسجيل عملية شراء أو دفعة؛ يُعاد حساب الرصيد المستحق تلقائيًا.</li>
+        </ol>
+      </div>
+    </div>
+    <figure class="shot">
+      <div class="ph">
+        <span class="ico">▣</span>
+        <b>Capture 15 / لقطة 15</b>
+        <p lang="fr">Liste des fournisseurs avec solde.</p>
+        <p lang="ar" dir="rtl">قائمة الموردين مع الرصيد.</p>
+      </div>
+    </figure>
+    <figure class="shot">
+      <div class="ph">
+        <span class="ico">▣</span>
+        <b>Capture 16 / لقطة 16</b>
+        <p lang="fr">Registre d’un fournisseur : transactions et solde.</p>
+        <p lang="ar" dir="rtl">سجل المورد: العمليات والرصيد.</p>
+      </div>
+    </figure>
+  </section>
+
+  <section id="settings">
+    <h2 class="section-title">
+      <span class="no">11</span>
+      <span class="title-fr">Paramètres (administrateur)</span>
+      <span lang="ar" dir="rtl">الإعدادات (المدير)</span>
+    </h2>
+    <div class="cols">
+      <div lang="fr">
+        <ol>
+          <li><b>Magasin :</b> renseignez les informations du magasin puis « Enregistrer ».</li>
+          <li><b>Utilisateurs :</b> ajoutez des comptes, changez un mot de passe ou supprimez un utilisateur.</li>
+          <li><b>Matrice :</b> gérez les groupes optiques et les traitements (ajouter, modifier, supprimer).</li>
+          <li><b>Données :</b> « Sauvegarder la Base de Données » crée une copie <code>.db</code> ; « Exporter vers Excel » produit un fichier <code>.xlsx</code>.</li>
+          <li><b>Zone dangereuse :</b> la suppression est <b>irréversible</b> et demande votre mot de passe. Faites une sauvegarde avant.</li>
+        </ol>
+      </div>
+      <div lang="ar" dir="rtl">
+        <ol>
+          <li><b>المتجر:</b> أدخل معلومات المتجر ثم «Enregistrer».</li>
+          <li><b>المستخدمون:</b> أضف حسابات، غيّر كلمة المرور أو احذف مستخدمًا.</li>
+          <li><b>المصفوفة:</b> أدِر المجموعات البصرية والمعالجات (إضافة، تعديل، حذف).</li>
+          <li><b>البيانات:</b> «Sauvegarder la Base de Données» ينشئ نسخة <code>.db</code>؛ «Exporter vers Excel» ينتج ملف <code>.xlsx</code>.</li>
+          <li><b>المنطقة الخطرة:</b> الحذف <b>لا رجعة فيه</b> ويتطلب كلمة مرورك. أنشئ نسخة احتياطية قبل ذلك.</li>
+        </ol>
+      </div>
+    </div>
+    <figure class="shot">
+      <div class="ph">
+        <span class="ico">▣</span>
+        <b>Capture 17 / لقطة 17</b>
+        <p lang="fr">Onglets des paramètres : magasin, utilisateurs, matrice, données.</p>
+        <p lang="ar" dir="rtl">تبويبات الإعدادات: المتجر، المستخدمون، المصفوفة، البيانات.</p>
+      </div>
+    </figure>
+    <figure class="shot">
+      <div class="ph">
+        <span class="ico">▣</span>
+        <b>Capture 18 / لقطة 18</b>
+        <p lang="fr">Section sauvegarde, export Excel et zone dangereuse.</p>
+        <p lang="ar" dir="rtl">قسم النسخ الاحتياطي وتصدير Excel والمنطقة الخطرة.</p>
+      </div>
+    </figure>
+  </section>
+
+  <section class="tip">
+    <div class="cols">
+      <div lang="fr">
+        <h2>Bon à savoir</h2>
+        <ol>
+          <li>Sauvegardez régulièrement la base de données depuis Paramètres.</li>
+          <li>Les montants sont en dinars algériens (DA).</li>
+          <li>Assistance : voir les coordonnées affichées sur la fenêtre d’activation.</li>
+        </ol>
+      </div>
+      <div lang="ar" dir="rtl">
+        <h2>معلومات مفيدة</h2>
+        <ol>
+          <li>أنشئ نسخة احتياطية من قاعدة البيانات بانتظام من الإعدادات.</li>
+          <li>المبالغ بالدينار الجزائري (DA).</li>
+          <li>للدعم: راجع بيانات الاتصال في نافذة التفعيل.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>OptiFlow · Manuel / دليل المستخدم</footer>
+
+</body>
+</html>

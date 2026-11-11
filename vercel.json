@@ -1,0 +1,80 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "outputDirectory": "public",
+  "redirects": [
+    {
+      "source": "/main",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/main/index",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/main/:path*",
+      "destination": "/:path*",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/main/index.html"
+    },
+    {
+      "source": "/atlas-optic",
+      "destination": "/main/atlas-optic.html"
+    },
+    {
+      "source": "/atlas-installment",
+      "destination": "/main/atlas-installment.html"
+    },
+    {
+      "source": "/atlas-garage",
+      "destination": "/main/atlas-garage.html"
+    },
+    {
+      "source": "/atlas-school",
+      "destination": "/main/atlas-school.html"
+    },
+    {
+      "source": "/atlas-auto",
+      "destination": "/main/atlas-auto.html"
+    },
+    {
+      "source": "/atlas-travel",
+      "destination": "/main/atlas-travel.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)\\.(jpg|png|css|js)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400"
+        }
+      ]
+    }
+  ]
+}
